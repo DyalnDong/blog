@@ -80,17 +80,21 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 .topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 18px 0 16px;
-  border-bottom: 1px solid var(--rule);
   position: sticky;
   top: 0;
   z-index: 50;
   background: var(--bg);
+  border-bottom: 1px solid var(--rule);
   backdrop-filter: saturate(140%) blur(8px);
   -webkit-backdrop-filter: saturate(140%) blur(8px);
+}
+.topbar-inner {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 18px var(--gutter) 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .brand {
@@ -946,12 +950,12 @@ button { font-family: inherit; cursor: pointer; }
   .year-tabs { gap: 0; }
   .year-tab { margin-right: 10px; padding-right: 10px; font-size: 13px; }
 
-  .topbar {
+  .topbar-inner {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
     gap: 10px 16px;
-    padding: 18px 0 14px;
+    padding: 14px var(--gutter) 12px;
   }
   .brand-mark { font-size: 19px; letter-spacing: 0.08em; }
   .brand-sub { display: none; }

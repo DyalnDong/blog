@@ -45,21 +45,23 @@ const catOf = (id) => window.CATEGORIES.find((c) => c.id === id) || { name: id, 
 function TopBar({ view, setView, onSearch, locale, setLocale }) {
   return (
     <header className="topbar">
-      <div className="brand" onClick={() => setView({ name: "home" })}>
-        <div className="brand-mark">岁末冬至</div>
-        <div className="brand-sub">Solstice Notes</div>
-      </div>
-      <nav className="nav">
-        <button className={view.name === "home" ? "active" : ""} onClick={() => setView({ name: "home" })}>文章</button>
-        <button className={view.name === "archive" ? "active" : ""} onClick={() => setView({ name: "archive" })}>归档</button>
-        <button className={view.name === "about" ? "active" : ""} onClick={() => setView({ name: "about" })}>关于</button>
-        <button onClick={onSearch} aria-label="搜索">搜索</button>
-        <div className="locale-toggle" role="group" aria-label="语言切换">
-          <button className={locale === 'cn' ? 'on' : ''} onClick={() => setLocale('cn')}>简</button>
-          <span className="sep">·</span>
-          <button className={locale === 'tw' ? 'on' : ''} onClick={() => setLocale('tw')}>繁</button>
+      <div className="topbar-inner">
+        <div className="brand" onClick={() => setView({ name: "home" })}>
+          <div className="brand-mark">岁末冬至</div>
+          <div className="brand-sub">Solstice Notes</div>
         </div>
-      </nav>
+        <nav className="nav">
+          <button className={view.name === "home" ? "active" : ""} onClick={() => setView({ name: "home" })}>文章</button>
+          <button className={view.name === "archive" ? "active" : ""} onClick={() => setView({ name: "archive" })}>归档</button>
+          <button className={view.name === "about" ? "active" : ""} onClick={() => setView({ name: "about" })}>关于</button>
+          <button onClick={onSearch} aria-label="搜索">搜索</button>
+          <div className="locale-toggle" role="group" aria-label="语言切换">
+            <button className={locale === 'cn' ? 'on' : ''} onClick={() => setLocale('cn')}>简</button>
+            <span className="sep">·</span>
+            <button className={locale === 'tw' ? 'on' : ''} onClick={() => setLocale('tw')}>繁</button>
+          </div>
+        </nav>
+      </div>
     </header>
   );
 }
@@ -507,9 +509,7 @@ function App() {
 
   return (
     <>
-      <div className="shell">
-        <TopBar view={view} setView={setView} onSearch={() => setSearchOpen(true)} locale={locale} setLocale={setLocale} />
-      </div>
+      <TopBar view={view} setView={setView} onSearch={() => setSearchOpen(true)} locale={locale} setLocale={setLocale} />
       {body}
       <Footer setView={setView} />
       {searchOpen && <SearchOverlay articles={articles} onClose={() => setSearchOpen(false)} setView={setView} />}
