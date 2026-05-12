@@ -497,33 +497,36 @@ button { font-family: inherit; cursor: pointer; }
 }
 
 .prose { font-size: 17px; line-height: 1.95; color: var(--ink); }
-.prose > * + * { margin-top: 1.4em; }
-.prose p { margin: 0; text-indent: 2em; }
-.prose p.lead { text-indent: 0; font-size: 19px; color: var(--ink-soft); }
+.prose > * + * { margin-top: 1.6em; }
+.prose p { margin: 0; text-indent: 0; }
+.prose p.lead { font-size: 19px; color: var(--ink-soft); }
 .prose h2 {
-  font-size: 22px;
-  margin-top: 2.4em;
-  margin-bottom: 0.6em;
-  font-weight: 500;
+  font-size: 26px;
+  margin-top: 2.8em;
+  margin-bottom: 0.8em;
+  font-weight: 600;
   letter-spacing: 0.02em;
+  color: var(--ink);
   position: relative;
-  padding-left: 18px;
+  padding-left: 20px;
+  line-height: 1.4;
 }
 .prose h2::before {
   content: "";
   position: absolute;
-  left: 0; top: 0.55em;
-  width: 8px; height: 8px;
+  left: 0; top: 0.5em;
+  width: 9px; height: 9px;
   background: var(--seal);
   transform: rotate(45deg);
 }
 .prose h3 {
-  font-size: 17px;
-  margin-top: 2em;
-  margin-bottom: 0.4em;
-  font-weight: 500;
-  color: var(--ink-soft);
-  letter-spacing: 0.04em;
+  font-size: 20px;
+  margin-top: 2.2em;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+  line-height: 1.4;
 }
 .prose ul {
   padding-left: 1.4em;
@@ -1004,11 +1007,11 @@ button { font-family: inherit; cursor: pointer; }
   .article-title { font-size: 26px; line-height: 1.32; letter-spacing: 0; }
   .article-meta { flex-wrap: wrap; gap: 8px 16px; padding-bottom: 22px; margin-bottom: 28px; font-size: 11px; }
   .prose { font-size: 16.5px; line-height: 1.9; }
-  .prose p { text-indent: 2em; }
+  .prose p { text-indent: 0; }
   .prose p.lead { font-size: 17.5px; }
-  .prose h2 { font-size: 19px; margin-top: 1.8em; padding-left: 14px; }
-  .prose h2::before { width: 6px; height: 6px; top: 0.6em; }
-  .prose h3 { font-size: 16.5px; }
+  .prose h2 { font-size: 22px; margin-top: 2.2em; margin-bottom: 0.6em; padding-left: 16px; }
+  .prose h2::before { width: 7px; height: 7px; top: 0.55em; }
+  .prose h3 { font-size: 18px; margin-top: 1.8em; }
   .prose blockquote { padding-left: 14px; font-size: 15.5px; }
 
   .article-foot { margin-top: 44px; }
