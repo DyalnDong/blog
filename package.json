@@ -1,0 +1,10 @@
+{
+  "name": "solstice-notes",
+  "version": "1.0.0",
+  "description": "岁末冬至 · 个人博客",
+  "private": true,
+  "scripts": {
+    "build": "node build.js",
+    "serve": "python3 -m http.server 8000"
+  }
+}
