@@ -3,3 +3,7 @@ node_modules/
 *.log
 .vscode/
 .idea/
+
+# iCloud Drive 同步冲突生成的副本
+posts/* [0-9].md
+posts/* [0-9][0-9].md
