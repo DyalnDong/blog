@@ -17,8 +17,9 @@ import-wechat.py —— 从微信公众号文章 URL 抓取内容,生成 posts/Y
     python3 tools/import-wechat.py https://mp.weixin.qq.com/s/abc123 --cat life
 """
 
-import argparse, datetime, re, sys, os
+import argparse, datetime, re, sys, os, hashlib
 from pathlib import Path
+from urllib.parse import urlparse
 
 try:
     import requests
@@ -65,17 +66,76 @@ def parse(html):
     else:
         date = datetime.datetime.now().strftime("%Y-%m-%d")
 
-    body_html = clean_body(content_el)
-    return title, date, body_html
+    image_urls = []
+    body_html = clean_body(content_el, image_urls)
+    return title, date, body_html, image_urls
 
-def clean_body(root):
-    """提取并清洗正文为干净 HTML"""
-    # 删除图片、视频、嵌入式内容(注意:不删 section,新版公众号每段都裹在 section 里)
-    for tag in root.find_all(["img", "iframe", "video", "audio", "script", "style", "svg"]):
+def download_images(image_urls, date, blog_root, source_url):
+    """下载图片到 assets/images/YYYY-MM-DD/N.ext,返回 {placeholder: relative_path}"""
+    if not image_urls:
+        return {}
+    img_dir = blog_root / "assets" / "images" / date
+    img_dir.mkdir(parents=True, exist_ok=True)
+    placeholder_to_path = {}
+    for i, url in enumerate(image_urls):
+        try:
+            # 公众号图床要求 Referer
+            r = requests.get(url, headers={"User-Agent": UA, "Referer": source_url}, timeout=30)
+            r.raise_for_status()
+        except Exception as e:
+            print(f"⚠️  图片 {i} 下载失败 ({url[:60]}...): {e}", file=sys.stderr)
+            placeholder_to_path[f"__IMG_{i}__"] = ""
+            continue
+        # 判断扩展名:URL 末尾的 wx_fmt=jpeg/png/gif/webp
+        fmt_match = re.search(r"wx_fmt=(\w+)", url)
+        if fmt_match:
+            ext = fmt_match.group(1).lower()
+        else:
+            ct = r.headers.get("Content-Type", "")
+            ext = {"image/jpeg": "jpg", "image/png": "png", "image/gif": "gif", "image/webp": "webp"}.get(ct, "jpg")
+        if ext == "jpeg":
+            ext = "jpg"
+        fname = f"{i + 1:02d}.{ext}"
+        fpath = img_dir / fname
+        fpath.write_bytes(r.content)
+        rel = f"assets/images/{date}/{fname}"
+        placeholder_to_path[f"__IMG_{i}__"] = rel
+        print(f"📷 [{i + 1}/{len(image_urls)}] {rel} ({len(r.content)//1024} KB)", file=sys.stderr)
+    return placeholder_to_path
+
+def inject_images(body_html, placeholder_to_path):
+    """把 __IMG_N__ 占位符替换成 <img>(CSS 会让它 display:block 自动占段)"""
+    def repl(match):
+        ph = match.group(0)
+        path = placeholder_to_path.get(ph, "")
+        if not path:
+            return ""
+        return f'<img src="{path}" alt=""/>'
+    out = re.sub(r"__IMG_\d+__", repl, body_html)
+    # 收尾:删空 <p></p> 和只含图片+空白的废段
+    out = re.sub(r"<p>\s*</p>", "", out)
+    return out
+
+def clean_body(root, image_urls=None):
+    """提取并清洗正文为干净 HTML;若 image_urls 为 list,把图片 URL 收集进去"""
+    # 删除视频、嵌入式内容(保留 img,稍后处理)
+    for tag in root.find_all(["iframe", "video", "audio", "script", "style", "svg"]):
         tag.decompose()
     # 删除 mpvoice / qqmusic / share_ 等公众号专有组件
     for tag in root.find_all(attrs={"class": re.compile(r"^(mpvoice|qqmusic|share_)")}):
         tag.decompose()
+    # 处理 <img>:公众号真实地址在 data-src,转成 <p class="figure"><img>
+    if image_urls is None:
+        image_urls = []
+    for img in root.find_all("img"):
+        src = img.get("data-src") or img.get("src") or ""
+        if not src or src.startswith("data:"):
+            img.decompose()
+            continue
+        image_urls.append(src)
+        # 用占位标记,稍后替换为下载后的本地路径
+        placeholder = f"__IMG_{len(image_urls) - 1}__"
+        img.replace_with(placeholder)
 
     out_parts = []
     walk(root, out_parts)
@@ -161,13 +221,25 @@ def main():
     ap.add_argument("--read", type=int, help="阅读分钟,默认按 500 字/分自动估算")
     ap.add_argument("--date", help="日期 YYYY-MM-DD,默认从公众号时间戳推断")
     ap.add_argument("--excerpt", help="摘要,默认取正文首段前 120 字")
+    ap.add_argument("--no-images", action="store_true", help="跳过图片下载")
     ap.add_argument("--dry-run", action="store_true", help="只预览,不写文件")
     args = ap.parse_args()
 
     print(f"⏳ 抓取 {args.url}", file=sys.stderr)
     html = fetch(args.url)
-    title, parsed_date, body_html = parse(html)
+    title, parsed_date, body_html, image_urls = parse(html)
     date = args.date or parsed_date
+
+    # 下载图片并替换为本地路径
+    blog_root = Path(__file__).parent.parent
+    if image_urls and not args.no_images:
+        print(f"📷 准备下载 {len(image_urls)} 张图片...", file=sys.stderr)
+        ph_to_path = download_images(image_urls, date, blog_root, args.url)
+        body_html = inject_images(body_html, ph_to_path)
+    else:
+        # 没图片或显式跳过:删占位符
+        body_html = re.sub(r"__IMG_\d+__", "", body_html)
+
     read = args.read or estimate_read(body_html)
     excerpt = args.excerpt or make_excerpt(body_html)
 
