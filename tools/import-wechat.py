@@ -68,6 +68,13 @@ def parse(html):
 
     image_urls = []
     body_html = clean_body(content_el, image_urls)
+    # 剥掉公众号常见的装饰首段:"第 N 篇｜每周记录" / "第 N 篇 | 每周记录" 等
+    body_html = re.sub(
+        r"^\s*<h[23]>\s*第\s*\d+\s*篇\s*[|｜][^<]*</h[23]>\s*",
+        "",
+        body_html,
+        count=1,
+    )
     return title, date, body_html, image_urls
 
 def download_images(image_urls, date, blog_root, source_url):
@@ -147,6 +154,15 @@ def clean_body(root, image_urls=None):
         # 按双换行/<br> 切段
         parts = re.split(r"(?:<br\s*/?>\s*){1,}|\n{2,}", raw)
         raw = "\n".join(f"<p>{p.strip()}</p>" for p in parts if p.strip())
+    else:
+        # 段落内的 <br><br> 当作伪分段,转成真正的段落分隔
+        raw = re.sub(r"(?:<br\s*/?>\s*){2,}", "</p><p>", raw)
+        # 标题前后:如果 <h2>/<h3> 紧贴在文本之后(没 <p>),前面加个段落结束;
+        # 后面如果是裸文本,包成 <p>
+        raw = re.sub(r"([^>])(<h[23]>)", r"\1</p>\2", raw)
+        raw = re.sub(r"(</h[23]>)([^<\s])", r"\1<p>\2", raw)
+        # 单个剩余 <br> 改成空格
+        raw = re.sub(r"<br\s*/?>", " ", raw)
 
     # 后处理:压缩多空白、删空标签
     raw = re.sub(r"\s+", " ", raw)
