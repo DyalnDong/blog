@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>财帛 · 隐私政策 / Privacy Policy</title>
+<meta name="description" content="财帛 (Caibo) 隐私政策。不收集任何数据,不连接银行,所有卡片资料只保存在你的 iPhone 上。" />
+<meta name="robots" content="index,follow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="shell" style="display:flex;justify-content:space-between;width:100%;padding:0 24px;">
+    <a href="/" class="brand">岁末冬至<span class="brand-sub">SOLSTICE NOTES</span></a>
+    <nav>
+      <a href="/caibo/privacy/">隐私</a>
+      <a href="/caibo/support/">支持</a>
+      <a href="/">回博客</a>
+    </nav>
+  </div>
+</header>
+
+<main class="shell">
+  <div class="eyebrow">财帛 · CAIBO</div>
+  <h1>隐私政策 / Privacy Policy</h1>
+  <div class="meta">最近更新 / Last Updated: 2026-06-01</div>
+
+  <article class="prose">
+    <blockquote>
+      <p>财帛是一款纯本地的个人信用卡周转与还款管理工具。它不连接银行、不处理支付、不转账、不执行任何交易。所有卡片资料只保存在你的 iPhone 上。</p>
+    </blockquote>
+
+    <hr/>
+
+    <h2>中文版</h2>
+
+    <h3>一、我们是谁</h3>
+    <p>财帛 (Caibo) 是一款个人信用卡周转 / 还款管理 App,帮你把多张卡的账单日、还款日、临额到期、年费达标进度集中到一处。<br/>
+    联系邮箱:<a href="mailto:jtudyh@gmail.com">jtudyh@gmail.com</a></p>
+
+    <h3>二、我们收集什么、不收集什么</h3>
+    <p><strong>我们不收集任何数据:</strong></p>
+    <ul>
+      <li>我们没有任何服务器,不收集账号、设备 ID、地理位置、广告标识符。</li>
+      <li>我们不收集你的姓名、电话、住址或任何身份信息。</li>
+      <li>我们不收集你的银行登录凭据、卡号、CVV、密码或银行 App 截图。</li>
+      <li>我们不内置任何分析 SDK、广告 SDK 或第三方追踪。</li>
+      <li>App 不连接任何银行,没有银行登录、没有账户聚合、不处理支付、不转账、不执行任何交易。</li>
+    </ul>
+    <p><strong>App 只在你的设备本地</strong>保存以下你手动录入的数据:</p>
+    <ul>
+      <li>卡片元信息:发卡行、卡名、卡级、账单日、还款日、固定额度、临时额度、可用额度、年费、年费减免规则、备注</li>
+      <li>持卡人代号(你自定义的标签,如「李逍遥 / 赵灵儿 / 配偶」)及其配色</li>
+      <li>提醒设置(推送时刻、提前天数)与提醒勾选记录</li>
+      <li>你添加的自定义银行(名称 + 你上传的 logo 图片)</li>
+      <li>AI 查询到的卡片权益缓存(仅为避免重复查询,存在本地)</li>
+    </ul>
+    <p>所有以上数据通过 iOS 的 <strong>SwiftData / UserDefaults</strong> 存储在 App 的私有沙盒中,不离开你的设备,不上传到任何服务器,不与任何第三方共享。</p>
+
+    <h3>三、关于「记一笔 / 周转分配」</h3>
+    <p>「记一笔」只是一个本地记录与计算工具:你手动输入一笔已经发生的消费金额,App 用本机算法帮你算出分摊到自己哪几张卡。这个过程完全在设备本地完成,不向任何服务器发送,也不执行任何真实交易或资金操作。</p>
+
+    <h3>四、关于「AI 顾问」功能(可选,需自带 API Key)</h3>
+    <p>App <strong>不内置任何 LLM API Key</strong>。「我的 → AI 设置」默认不配置任何提供商。只有当你<strong>主动</strong>填入 OpenRouter / OpenAI / 自定义 OpenAI 兼容服务的 API Key,并在「发现」页点击 AI 按钮时,App 才会发起网络请求。它有两类调用:</p>
+    <ol>
+      <li><strong>卡组体检</strong>:把你的卡片<strong>脱敏摘要</strong>(持卡人代号 + 银行简称 + 脱敏卡名 + 利用率百分比 + 还款日相对天数 + 金额档位)通过 HTTPS 发送到你配置的提供商,换回风险与优化建议。<strong>脱敏摘要中不包含</strong>真实姓名、卡号、地址、电话、精确余额或消费明细。</li>
+      <li><strong>卡片权益查询</strong>:把你卡片的<strong>产品名</strong>(如「招商银行 钻石卡」)交给提供商的联网搜索,查询该卡产品的<strong>公开权益</strong>(如机场贵宾厅、返现类别)并整理成摘要。查询结果会标注「AI 整理,以发卡行官方为准」。返回的权益摘要会缓存在本地,避免每次重复查询。</li>
+    </ol>
+    <p>API Key 本身存储在 iOS Keychain 中,不被本 App 同步到云端。AI 已被明确指示<strong>不建议任何套现、虚假交易或违规操作</strong>。如果你不想用 AI 功能,<strong>清空 API Key 即可</strong>,从此不会有任何外部网络请求,App 完全离线运行。</p>
+
+    <h3>五、关于数据导出 / 导入(备份)</h3>
+    <p>「我的 → 数据」可以把你的全部本地资料导出成一个 <strong>JSON 文件</strong>,由你自己保存(如 AirDrop 到电脑)。这个文件由你完全掌控,App 不会替你上传到任何地方。导入时,文件只在本机被读取还原。</p>
+
+    <h3>六、通知</h3>
+    <p>提醒功能使用 iOS 本地通知 (UNUserNotificationCenter),只在设备本地调度,不发送到任何远程服务器,没有远程推送。授权时机:你在「我的 → 提醒」中首次打开总开关。</p>
+
+    <h3>七、你的权利</h3>
+    <p>因为我们不收集任何数据,所以没有「删除我的云端数据」流程 — 你可以:</p>
+    <ul>
+      <li>直接卸载 App → 所有本地数据立刻清除</li>
+      <li>或在「我的 → 数据」里重置 / 清空当前数据</li>
+    </ul>
+
+    <h3>八、数据传输小结</h3>
+    <p>App 默认完全离线运行。唯一可能的对外网络请求,是你主动启用 AI 功能时,脱敏摘要 / 卡片产品名通过 HTTPS 发送到你<strong>自己选择</strong>的 LLM 提供商。请自行评估该提供商的数据政策。</p>
+
+    <h3>九、儿童隐私</h3>
+    <p>本 App 面向成年持卡人,不面向 13 岁以下儿童,也不会有意收集儿童信息(事实上不收集任何人的信息)。</p>
+
+    <h3>十、变更</h3>
+    <p>本政策如有修改将更新顶部「最近更新」日期。重大变更我们会在 App 更新说明里提示。</p>
+
+    <h3>十一、联系</h3>
+    <p>任何问题请发邮件至 <a href="mailto:jtudyh@gmail.com">jtudyh@gmail.com</a></p>
+
+    <hr/>
+
+    <h2>English Summary</h2>
+
+    <p><strong>Last updated: 2026-06-01</strong></p>
+
+    <p>Caibo is a personal credit-card repayment / cashflow organizer that runs entirely on-device. It does NOT connect to any bank, process payments, move money, or execute any transaction.</p>
+
+    <p><strong>We collect</strong>: nothing. No servers, no accounts, no analytics SDK, no advertising SDK, no tracking.</p>
+
+    <p><strong>On-device storage</strong> (your local sandbox only): card metadata you enter, holder aliases and colors, reminder preferences and check-off state, any custom banks (name + logo image) you add, and a local cache of AI-fetched card benefits. None of it leaves your device.</p>
+
+    <p><strong>"Log a spend"</strong> is a local note + math helper — you type an amount you already spent and the app computes how to split it across your own cards. Nothing is sent anywhere and no real transaction is executed.</p>
+
+    <p><strong>Optional AI advisor (bring your own key)</strong>: the app ships with NO API key. Only when you enter your own OpenRouter / OpenAI / custom OpenAI-compatible key and tap the AI button does the app make a network request:</p>
+    <ul>
+      <li><em>Health check</em> — an anonymized card summary (holder alias + bank short name + masked nickname + utilization % + days-to-due + amount BANDS) is sent over HTTPS to the provider YOU choose. Real names, card numbers, addresses, exact balances and transaction details are never sent.</li>
+      <li><em>Card benefits</em> — the card's product name (e.g. "CMB Diamond") is sent to the provider's web search to summarize that product's PUBLIC benefits; results are labeled "verify with the issuer" and cached locally.</li>
+    </ul>
+
+    <p>The AI is explicitly instructed never to suggest cash-out or fake transactions. API keys are stored in the iOS Keychain. Clear the key and the app is fully offline.</p>
+
+    <p><strong>Export / import</strong>: "Me → Data" can export all local data to a JSON file you control (e.g. AirDrop to your computer). The app never uploads it for you.</p>
+
+    <p><strong>Notifications</strong> are local (UNUserNotificationCenter), scheduled on-device, no remote push.</p>
+
+    <p><strong>Children</strong>: the app is for adult cardholders and does not knowingly collect any information from children (it collects no information from anyone).</p>
+
+    <p><strong>Your rights</strong>: uninstalling the app removes everything. There's no remote data to delete.</p>
+
+    <p><strong>Contact</strong>: <a href="mailto:jtudyh@gmail.com">jtudyh@gmail.com</a></p>
+  </article>
+
+  <footer>
+    <span>© 财帛 · Caibo</span>
+    <span>
+      <a href="/caibo/support/">支持 / Support</a> ·
+      <a href="/">岁末冬至</a>
+    </span>
+  </footer>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,176 @@
+/* 财帛 · 法律文档静态页 —— 复用博客视觉但独立排版 */
+:root {
+  --bg: #f6f1e6;
+  --bg-elev: #fbf7ec;
+  --paper: #fffaf0;
+  --ink: #1f1b15;
+  --ink-soft: #3a342a;
+  --muted: #80776a;
+  --rule: #d8cfbd;
+  --rule-soft: #e7decb;
+  --seal: #8a3a2e;
+  --tracking-cap: 0.22em;
+  --serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", "SimSun", "Times New Roman", serif;
+  --sans: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14110d;
+    --bg-elev: #1c1812;
+    --paper: #1a1610;
+    --ink: #ece4d4;
+    --ink-soft: #c5bda9;
+    --muted: #8a826f;
+    --rule: #3a3326;
+    --rule-soft: #2b251a;
+    --seal: #c97969;
+  }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); }
+body {
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.95;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.shell {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.topbar {
+  border-bottom: 1px solid var(--rule);
+  padding: 22px 0 18px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-family: var(--sans);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+.topbar a { color: var(--muted); text-decoration: none; margin-left: 18px; }
+.topbar a:hover { color: var(--seal); }
+.brand {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  text-decoration: none;
+}
+.brand-sub {
+  margin-left: 12px;
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: var(--tracking-cap);
+  text-transform: uppercase;
+}
+.eyebrow {
+  margin-top: 56px;
+  font-family: var(--sans);
+  font-size: 12px;
+  letter-spacing: var(--tracking-cap);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+h1 {
+  font-size: 32px;
+  line-height: 1.35;
+  margin: 14px 0 28px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.meta {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 36px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--rule);
+}
+.prose > * + * { margin-top: 1.4em; }
+.prose h2 {
+  font-size: 24px;
+  margin-top: 2.4em;
+  margin-bottom: 0.6em;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  position: relative;
+  padding-left: 20px;
+}
+.prose h2::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0.5em;
+  width: 9px; height: 9px;
+  background: var(--seal);
+  transform: rotate(45deg);
+}
+.prose h3 {
+  font-size: 19px;
+  margin-top: 1.8em;
+  margin-bottom: 0.4em;
+  font-weight: 600;
+  color: var(--ink);
+}
+.prose p { margin: 0; }
+.prose ul, .prose ol {
+  padding-left: 1.5em;
+  margin: 1em 0;
+}
+.prose li { margin: 0.4em 0; }
+.prose strong { font-weight: 600; color: var(--ink); }
+.prose blockquote {
+  border-left: 3px solid var(--seal);
+  padding: 4px 0 4px 22px;
+  margin: 1.4em 0;
+  color: var(--ink-soft);
+  font-style: italic;
+  background: var(--bg-elev);
+  padding-right: 18px;
+  border-radius: 0 4px 4px 0;
+}
+.prose a {
+  color: var(--seal);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+}
+.prose a:hover { border-color: var(--seal); }
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 3em 0;
+}
+.prose code {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.88em;
+  background: var(--rule-soft);
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+footer {
+  margin: 72px 0 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+footer a { color: var(--muted); text-decoration: none; }
+footer a:hover { color: var(--seal); }
+@media (max-width: 640px) {
+  body { font-size: 16px; line-height: 1.85; }
+  .shell { padding: 0 18px; }
+  h1 { font-size: 26px; }
+  .prose h2 { font-size: 21px; padding-left: 16px; }
+  .prose h2::before { width: 7px; height: 7px; top: 0.55em; }
+  .prose h3 { font-size: 17.5px; }
+}
