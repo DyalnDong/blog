@@ -490,6 +490,15 @@ function App() {
   const articles = window.ARTICLES;
   useLocaleDOM(locale);
 
+  // 进入页面时若 URL 有 ?article=aN,直接跳到文章详情(v2 与外链共用)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('article');
+    if (id && articles.some((a) => a.id === id)) {
+      setView({ name: 'article', id });
+    }
+  }, []);
+
   useEffect(() => {
     const onKey = (e) => {
       if ((e.metaKey || e.ctrlKey) && e.key === "k") { e.preventDefault(); setSearchOpen(true); }

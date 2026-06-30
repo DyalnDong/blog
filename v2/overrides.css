@@ -1,0 +1,195 @@
+/* ───── 岁末冬至 v2 — 在 sac 模板上的覆盖 ───── */
+
+/* 1. 把 sac 的橙改成你的朱印红做次要装饰?暂时保留 sac 原橙(更醒目)。
+      若要回朱印红,把下面这行取消注释:
+   :root { --accent: #8a3a2e; } */
+
+/* 2. Hero 右侧:没有头像,做一个印章风装饰 */
+.hero__right{
+  display:flex;align-items:center;justify-content:center;
+  padding:calc(var(--nav-h) + 4vh) 0;
+}
+.hero__mark{
+  position:relative;
+  width:min(40vw,460px);
+  aspect-ratio:1;
+  border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  background:
+    linear-gradient(rgba(201,192,178,.18) 1px,transparent 1px) 0 0/100% 28px,
+    linear-gradient(90deg,rgba(201,192,178,.18) 1px,transparent 1px) 0 0/28px 100%;
+}
+.hero__mark::before,
+.hero__mark::after{
+  content:"";position:absolute;width:60%;height:60%;
+  border:1px solid rgba(240,101,46,.18);
+  border-radius:50%;
+}
+.hero__mark::before{top:20%;left:20%;}
+.hero__mark::after{
+  width:84%;height:84%;top:8%;left:8%;
+  border-style:dashed;border-color:rgba(201,192,178,.5);
+}
+.hero__mark-inner{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:18px;
+  text-align:center;
+}
+.hero__mark-seal{
+  display:inline-block;
+  background:var(--accent);color:var(--paper);
+  font-family:var(--serif-cjk);font-weight:600;
+  font-size:clamp(20px,2.4vw,32px);line-height:1.1;
+  padding:18px 16px;letter-spacing:.1em;
+  box-shadow:0 0 0 2px var(--paper),0 0 0 3px var(--accent);
+}
+.hero__mark-en{
+  font-family:var(--serif);font-weight:500;
+  font-size:clamp(11px,1.05vw,15px);
+  letter-spacing:.32em;color:var(--ink);line-height:1.4;
+}
+.hero__mark-since{
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;
+  font-size:10px;letter-spacing:.3em;color:var(--muted);
+}
+
+/* 3. About 蓝图区:中间放印章而不是头像 */
+.bp__seal{
+  position:absolute;top:50%;left:53%;
+  transform:translate(-50%,-50%);z-index:2;
+  display:inline-block;
+}
+.bp__seal-zh{
+  display:inline-block;
+  background:var(--accent);color:var(--paper);
+  font-family:var(--serif-cjk);font-weight:600;
+  font-size:22px;line-height:1.1;letter-spacing:.1em;
+  padding:14px 12px;
+  box-shadow:0 0 0 2px var(--paper),0 0 0 3px var(--accent);
+}
+/* 4 角标注 */
+.bp__anno--tl{top:30px;left:30px;}
+.bp__anno--tr{top:30px;right:30px;text-align:right;}
+.bp__anno--bl{bottom:30px;left:30px;}
+.bp__anno--br{bottom:30px;right:30px;text-align:right;}
+
+/* 4. About 右侧规格表 */
+.about__panel{
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.35);
+  padding:0;
+}
+.about__panel-row{
+  display:flex;align-items:baseline;
+  padding:20px 24px;border-bottom:1px solid var(--line);
+  font-family:var(--sans-cjk);
+}
+.about__panel-row:last-child{border-bottom:none;}
+.about__k{
+  flex:none;width:64px;
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;
+  font-size:11px;letter-spacing:.18em;
+  color:var(--muted);text-transform:uppercase;
+}
+.about__v{
+  flex:1;color:var(--ink-soft);
+  font-size:15px;line-height:1.55;
+}
+
+/* 5. Writing 网格:用主 sac 的样式;头条 feat + 列表 wpost
+      但我们没有真实缩略图,占位:渐变色块 + 序号 */
+.feat__frame{
+  background:linear-gradient(135deg,var(--accent) 0%,#c44d24 100%);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--paper);
+  font-family:var(--serif);font-size:120px;font-weight:600;
+  letter-spacing:-.02em;
+}
+.feat__frame--cat-tech    { background:linear-gradient(135deg,#3a5a8a,#1f3a6a); }
+.feat__frame--cat-money   { background:linear-gradient(135deg,#8a4a2a,#5a2a1a); }
+.feat__frame--cat-life    { background:linear-gradient(135deg,#7a6a4a,#4a3a2a); }
+.feat__frame--cat-travel  { background:linear-gradient(135deg,#4a7a6a,#2a5a4a); }
+.feat__frame--cat-books   { background:linear-gradient(135deg,#8a3a2e,#5a1a14); }
+
+.wpost__thumb{
+  background:linear-gradient(135deg,var(--line),var(--muted));
+  display:flex;align-items:center;justify-content:center;
+  color:var(--paper);
+  font-family:var(--serif);font-size:48px;font-weight:600;
+  min-width:140px;
+}
+.wpost__thumb--cat-tech    { background:linear-gradient(135deg,#3a5a8a,#1f3a6a); }
+.wpost__thumb--cat-money   { background:linear-gradient(135deg,#8a4a2a,#5a2a1a); }
+.wpost__thumb--cat-life    { background:linear-gradient(135deg,#7a6a4a,#4a3a2a); }
+.wpost__thumb--cat-travel  { background:linear-gradient(135deg,#4a7a6a,#2a5a4a); }
+.wpost__thumb--cat-books   { background:linear-gradient(135deg,#8a3a2e,#5a1a14); }
+
+/* 6. 联系区基础样式(sections.css 里可能没完整覆盖)*/
+.contact{
+  position:relative;
+  min-height:60vh;
+  padding:calc(var(--nav-h) + 6vh) var(--pad-x) 12vh calc(var(--rail-x) + 56px);
+  border-top:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+}
+.contact__center{text-align:center;max-width:680px;}
+.contact__kicker{
+  display:flex;align-items:center;gap:18px;justify-content:center;
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;
+  font-size:11px;letter-spacing:.32em;color:var(--muted);
+  margin-bottom:36px;text-transform:uppercase;
+}
+.contact__kicker .ln{flex:1;max-width:120px;height:1px;background:var(--line);}
+.contact__title{
+  font-family:var(--serif-cjk);font-weight:500;
+  font-size:clamp(40px,5vw,72px);line-height:1.2;
+  margin-bottom:24px;
+}
+.contact__sub{
+  font-family:var(--sans-cjk);font-size:18px;color:var(--ink-soft);
+  margin-bottom:40px;
+}
+.contact__sub a{color:var(--accent);border-bottom:1px solid var(--accent);}
+.contact__cta{
+  display:flex;gap:18px;justify-content:center;flex-wrap:wrap;
+}
+
+/* 7. 页脚 */
+.foot{
+  padding:36px var(--pad-x) 36px calc(var(--rail-x) + 56px);
+  border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:ui-monospace,'SF Mono',Menlo,monospace;
+  font-size:11px;letter-spacing:.18em;color:var(--muted);
+  flex-wrap:wrap;gap:12px;
+}
+.foot a{color:var(--accent);}
+
+/* 8. 分类标签 active 态 */
+.writing__cat-row .cat{
+  cursor:pointer;font-family:var(--sans-cjk);
+  font-weight:500;font-size:14px;color:var(--muted);
+  transition:color .25s;
+}
+.writing__cat-row .cat:hover{color:var(--ink);}
+.writing__cat-row .cat.is-active{color:var(--accent);}
+
+/* 9. 移动端微调 */
+@media (max-width:780px){
+  .hero{
+    grid-template-columns:1fr;
+    padding:0 var(--pad-x);
+  }
+  .hero__wordmark{font-size:clamp(80px,16vw,150px);}
+  .hero__right{display:none;}
+  .about{
+    grid-template-columns:1fr;
+    padding:calc(var(--nav-h) + 4vh) var(--pad-x) 6vh;
+  }
+  .contact,.foot{padding-left:var(--pad-x);}
+  .about__panel-row{padding:16px 18px;}
+  .about__k{width:52px;font-size:10px;}
+  .about__v{font-size:14px;}
+  .wpost__thumb{min-width:100px;font-size:32px;}
+  .feat__frame{font-size:64px;}
+}

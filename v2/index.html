@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>岁末冬至 — 写作 · 阅读 · 生活</title>
+<meta name="description" content="岁末冬至 (Solstice Notes) — 中文写作站,投资、读书、旅行与生活的反思与记录。" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/tokens.css" />
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/sections.css" />
+<link rel="stylesheet" href="css/work-split.css" />
+<link rel="stylesheet" href="overrides.css" />
+</head>
+<body>
+
+<!-- ───── 顶栏 ───── -->
+<header class="nav" id="nav">
+  <a href="#hero" class="nav__brand">岁末冬至</a>
+  <nav class="nav__links" aria-label="主导航">
+    <a href="#about">ABOUT</a><span class="sep">·</span>
+    <a href="#writing">WRITING</a><span class="sep">·</span>
+    <a href="/" title="老版博客">CLASSIC</a><span class="sep">·</span>
+    <a href="#contact">CONTACT</a>
+    <span class="nav__stat">65 篇 <i></i></span>
+  </nav>
+</header>
+
+<!-- ───── 左侧脊柱 + 四角准星 ───── -->
+<div class="rail"><i></i><i></i><i></i></div>
+<span class="cross cross--tr"></span>
+<span class="cross cross--bl"></span>
+<span class="cross cross--br"></span>
+
+<main>
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <section class="hero" id="hero">
+    <div class="hero__left">
+      <h1 class="hero__wordmark" data-reveal>岁末冬至</h1>
+      <div class="hero__lower">
+        <p class="hero__kicker" data-reveal><span class="dot"></span> 中文写作 · 每周一篇</p>
+        <p class="hero__slogan" data-reveal>
+          一个写字、做事、读书的人<br />
+          投资、生活、读书与旅行的反思
+        </p>
+        <div class="hero__cta" data-reveal>
+          <a href="#writing" class="btn btn--ghost">查看文章 <span class="arr">→</span></a>
+          <a href="#contact" class="btn btn--link">联系我 <span class="arr">→</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="hero__right">
+      <!-- 没有头像,用蓝图风格的装饰区代替 -->
+      <div class="hero__mark">
+        <div class="hero__mark-inner">
+          <span class="hero__mark-seal">岁<br/>末<br/>冬<br/>至</span>
+          <span class="hero__mark-en">SOLSTICE<br/>NOTES</span>
+          <span class="hero__mark-since">EST · 2017</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ ABOUT ═══════════ -->
+  <section class="about" id="about">
+    <div class="about__left">
+      <h2 class="about__title" data-reveal>About</h2>
+      <div class="about__bio" data-reveal>
+        <p>大学念的是中文,后来从郑州去到郑州、洛阳、香港,现在在香港做投资。</p>
+        <p>2017 年开始写公众号,断续记录这十年的生活、阅读、市场观察。</p>
+        <p>这个站把 65 篇散落的稿子整在一起,既是给读者,也是给自己。</p>
+      </div>
+
+      <!-- 蓝图风格信息卡(从 sac 借用,简化版)-->
+      <div class="blueprint" data-reveal>
+        <span class="bp__target bp__target--tl"></span>
+        <span class="bp__target bp__target--tr"></span>
+        <span class="bp__target bp__target--bl"></span>
+        <span class="bp__target bp__target--br"></span>
+        <span class="bp__ring"></span>
+        <div class="bp__seal">
+          <span class="bp__seal-zh">岁<br/>末<br/>冬<br/>至</span>
+        </div>
+        <span class="bp__anno bp__anno--tl">
+          <span class="bp__mono bp__mono--key">SPEC · 001</span><br/>
+          <span class="bp__mono">SOLSTICE NOTES</span>
+        </span>
+        <span class="bp__anno bp__anno--tr">
+          <span class="bp__mono bp__mono--key">EST</span><br/>
+          <span class="bp__mono">2017 — NOW</span>
+        </span>
+        <span class="bp__anno bp__anno--bl">
+          <span class="bp__mono bp__mono--key">LOC</span><br/>
+          <span class="bp__mono">N 22°16′ HK</span>
+        </span>
+        <span class="bp__anno bp__anno--br">
+          <span class="bp__mono bp__mono--key">VOLUMES</span><br/>
+          <span class="bp__mono" id="bp-count">65 篇 · WEEKLY</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="about__right">
+      <div class="about__panel">
+        <div class="about__panel-row"><span class="about__k">写</span><span class="about__v">投资 / 生活 / 读书 / 旅行</span></div>
+        <div class="about__panel-row"><span class="about__k">读</span><span class="about__v">每年 100h+ 微信读书</span></div>
+        <div class="about__panel-row"><span class="about__k">做</span><span class="about__v">投资 · 内容 · 工具 · BUILD IN PUBLIC</span></div>
+        <div class="about__panel-row"><span class="about__k">居</span><span class="about__v">香港 · 偶尔回中原</span></div>
+        <div class="about__panel-row"><span class="about__k">在写</span><span class="about__v" id="about-latest">载入中…</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ WRITING ═══════════ -->
+  <section class="writing" id="writing">
+    <header class="writing__head">
+      <h2 class="writing__title" data-reveal>Writing</h2>
+      <div class="writing__cats" data-reveal>
+        <span class="writing__cat-title">写 — WRITE</span>
+        <span class="writing__cat-row" id="cat-row">
+          <span class="writing__cat-current" data-cat="all">全部</span>
+        </span>
+      </div>
+    </header>
+
+    <div class="writing__grid" id="writing-grid">
+      <!-- 由 JS 从 /data.js 渲染 -->
+      <div style="grid-column:1/-1;padding:40px;color:var(--muted);">载入文章中…</div>
+    </div>
+
+    <div style="padding:48px var(--pad-x);text-align:center;">
+      <a href="/" class="btn btn--link">查看全部 65 篇 <span class="arr">→</span></a>
+    </div>
+  </section>
+
+  <!-- ═══════════ CONTACT ═══════════ -->
+  <section class="contact" id="contact">
+    <div class="contact__center">
+      <div class="contact__kicker" data-reveal><span class="ln"></span>GET IN TOUCH / 联系<span class="ln"></span></div>
+      <h2 class="contact__title" data-reveal>有酒,有书,有故事。</h2>
+      <p class="contact__sub" data-reveal>来信请寄 <a href="mailto:jtudyh@gmail.com">jtudyh@gmail.com</a></p>
+      <div class="contact__cta" data-reveal>
+        <a href="mailto:jtudyh@gmail.com" class="btn btn--ghost">发邮件 <span class="arr">→</span></a>
+        <a href="/" class="btn btn--link">回老版 <span class="arr">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>© 岁末冬至 · 写于香港</span>
+    <span>v2 试验版 · <a href="/">切回 classic</a></span>
+  </footer>
+
+</main>
+
+<script src="/data.js"></script>
+<script src="render.js"></script>
+
+</body>
+</html>
